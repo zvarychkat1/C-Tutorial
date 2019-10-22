@@ -1,14 +1,3 @@
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 3000;
-
-server.use(middlewares);
-server.use(router);
-
-server.listen(port);
-
 const create = tag => document.createElement(tag);
 const appendBody = node => document.body.appendChild(node);
 const appendToParent = (parentNode, node) => parentNode.appendChild(node);
