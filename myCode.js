@@ -1,14 +1,3 @@
-const jsonServer = require('json-server');
-const server = jsonServer.create();
-const router = jsonServer.router('db.json');
-const middlewares = jsonServer.defaults();
-const port = process.env.PORT || 3000;
-
-server.use(middlewares);
-server.use(router);
-
-server.listen(port);
-
 const create = tag => document.createElement(tag);
 const appendBody = node => document.body.appendChild(node);
 const appendToParent = (parentNode, node) => parentNode.appendChild(node);
@@ -99,76 +88,89 @@ let btnNext = appendToParent(practice, create("button"))
 btnNext.classList.add("btnNext", "myBtn")
 btnNext.innerHTML = "Следующее"
 
-let n = 1
+let counter = 1 //counts unlocked pages
+let pgNum = 1 //counts current page number
 let pages = document.querySelector(".pages")
-createNewPage()
+
+createNewPage() //creating first page
 
 menu1.onclick = () => {
-    n = 1;
+    pgNum = 1;
     createNewPage()
 }
-
 menu2.onclick = () => {
-    n = 2;
-    createNewPage()
+    if (counter < 2) alert("Задание заблокировано")
+    else {
+        pgNum = 2;
+        createNewPage()
+    }
 }
-
 menu3.onclick = () => {
-    n = 3;
-    createNewPage()
+    if (counter < 3) alert("Задание заблокировано")
+    else {
+        pgNum = 3;
+        createNewPage()
+    }
 }
-
 menu4.onclick = () => {
-    n = 4;
-    createNewPage()
+    if (counter < 4) alert("Задание заблокировано")
+    else {
+        pgNum = 4;
+        createNewPage()
+    }
 }
-
 menu5.onclick = () => {
-    n = 5;
-    createNewPage()
+    if (counter < 5) alert("Задание заблокировано")
+    else {
+        pgNum = 5;
+        createNewPage()
+    }
 }
-
 menu6.onclick = () => {
-    n = 6;
-    createNewPage()
+    if (counter < 6) alert("Задание заблокировано")
+    else {
+        pgNum = 6;
+        createNewPage()
+    }
 }
-
 menu7.onclick = () => {
-    n = 7;
-    createNewPage()
+    if (counter < 7) alert("Задание заблокировано")
+    else {
+        pgNum = 7;
+        createNewPage()
+    }
 }
-
 
 btnPractice.onclick = () => {
     practice.style.display = 'flex';
     lecture.style.display = 'none';
 }
 
-btnCheckRadio.onclick = () => {
-    if (n == 1 || n == 2 || n == 6) {
+btnCheckRadio.onclick = () => { //detects type of task and checks if it correct
+    if (pgNum == 1 || pgNum == 2 || pgNum == 6) {
         let correct = document.querySelector(".correct")
         if (correct.checked) allCorrect()
         else smthWrong()
     }
-    if (n == 3) {
+    if (pgNum == 3) {
         let input3_1 = document.querySelector("#input3_1")
         let input3_2 = document.querySelector("#input3_2")
         if (input3_1.value == "int" && input3_2.value == "=") allCorrect()
         else smthWrong()
     }
-    if (n == 4) {
+    if (pgNum == 4) {
         let input4_1 = document.querySelector("#input4_1")
         let input4_2 = document.querySelector("#input4_2")
         if (input4_1.value == "bool" && input4_2.value == "string") allCorrect()
         else smthWrong()
     }
-    if (n == 5) {
+    if (pgNum == 5) {
         let input5_1 = document.querySelector("#input5_1")
         let input5_2 = document.querySelector("#input5_2")
         if (input5_1.value == "WriteLine" && input5_2.value == '"Learning C#"') allCorrect()
         else smthWrong()
     }
-    if (n == 7) {
+    if (pgNum == 7) {
         let input7_1 = document.querySelector("#input7_1")
         let input7_2 = document.querySelector("#input7_2")
         if (input7_1.value == "Console" && input7_2.value == "ReadLine") allCorrect()
@@ -176,18 +178,16 @@ btnCheckRadio.onclick = () => {
     }
 }
 
-
 function allCorrect() {
     pages.style.backgroundColor = "#9ac48d";
     btnNext.style.display = 'block'
-    n++
+    counter++
+    pgNum++
 }
 
 function smthWrong() {
     pages.style.backgroundColor = "#ffb3b1"
 }
-
-
 btnNext.onclick = createNewPage
 
 function createNewPage() {
@@ -195,7 +195,7 @@ function createNewPage() {
     lecture.style.display = 'flex';
     btnNext.style.display = 'none'
     pages.style.backgroundColor = "white"
-    switch (n) {
+    switch (pgNum) {
         case 1:
             theme.innerHTML = "Добро пожаловать в C#!"
             content.innerHTML = "C# - это элегантный объектно-ориентированный язык программирования, который позволяет разработчикам создавать разнообразие защищенных и надёжных приложений, которые запускаются на .Net Framework. Вы можете использовать С# для создания Windows приложений, Веб-сервисов, мобильных приложений, клиент-серверных приложений, приложений баз данных, и многого, многого другого."
